@@ -22,11 +22,17 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.minecrell.serverlistplus.core;
+package net.minecrell.serverlistplus.server.logging;
 
-public interface ProfileManager {
-    void reload() throws ServerListPlusException;
-    void save() throws ServerListPlusException;
-    boolean isEnabled();
-    void setEnabled(boolean state) throws ServerListPlusException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Logger;
+
+public class ConsoleLogger extends Logger {
+
+    public ConsoleLogger(Class<?> clazz) {
+        super(clazz.getName(), null);
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setFormatter(new ConsoleFormatter());
+        addHandler(handler);
+    }
 }

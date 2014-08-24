@@ -22,11 +22,34 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.minecrell.serverlistplus.core;
+package net.minecrell.serverlistplus.server.logging;
 
-public interface ProfileManager {
-    void reload() throws ServerListPlusException;
-    void save() throws ServerListPlusException;
-    boolean isEnabled();
-    void setEnabled(boolean state) throws ServerListPlusException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
+
+public class ConsoleFormatter extends Formatter {
+    private final DateFormat date = new SimpleDateFormat("HH:mm:ss");
+
+    @Override
+    public String format(LogRecord record) {
+        StringBuilder formatted = new StringBuilder()
+                .append(date.format(record.getMillis()))
+                .append(" [")
+                .append(record.getLevel().getName())
+                .append("] ")
+                .append(formatMessage(record))
+                .append('\n');
+
+        if (record.getThrown() != null) {
+            StringWriter trace = new StringWriter();
+            record.getThrown().printStackTrace(new PrintWriter(trace));
+            formatted.append(trace);
+        }
+
+        return formatted.toString();
+    }
 }

@@ -22,11 +22,27 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.minecrell.serverlistplus.core;
+package net.minecrell.serverlistplus.server.network;
 
-public interface ProfileManager {
-    void reload() throws ServerListPlusException;
-    void save() throws ServerListPlusException;
-    boolean isEnabled();
-    void setEnabled(boolean state) throws ServerListPlusException;
+import net.minecrell.serverlistplus.server.ServerListPlusServer;
+
+import java.net.InetSocketAddress;
+
+public class NetworkManager {
+    private final ServerListPlusServer server;
+    private final InetSocketAddress address;
+
+    public NetworkManager(ServerListPlusServer server, InetSocketAddress address) {
+        this.server = server;
+        this.address = address;
+    }
+
+    public void start() throws Exception {
+        // TODO
+    }
+
+
+    public void close() throws Exception {
+        // TODO
+    }
 }

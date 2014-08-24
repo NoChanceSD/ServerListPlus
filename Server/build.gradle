@@ -22,11 +22,16 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.minecrell.serverlistplus.core;
+apply plugin: 'java'
 
-public interface ProfileManager {
-    void reload() throws ServerListPlusException;
-    void save() throws ServerListPlusException;
-    boolean isEnabled();
-    void setEnabled(boolean state) throws ServerListPlusException;
+ext {
+    nettyVersion = '4.0.23.Final'
+}
+
+dependencies {
+    compile project(':Core')
+    compile 'com.google.guava:guava:17.0',
+            'com.google.code.gson:gson:2.3',
+            'io.netty:netty-all:$nettyVersion',
+            "io.netty:netty-transport-native-epoll:$nettyVersion"
 }

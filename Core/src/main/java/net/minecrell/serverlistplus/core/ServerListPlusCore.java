@@ -75,6 +75,10 @@ public class ServerListPlusCore {
     private String faviconCacheConf;
 
     public ServerListPlusCore(ServerListPlusPlugin plugin) throws ServerListPlusException {
+        this(plugin, null);
+    }
+
+    public ServerListPlusCore(ServerListPlusPlugin plugin, ProfileManager manager) throws ServerListPlusException {
         this.plugin = Preconditions.checkNotNull(plugin, "plugin");
         this.logger = new ServerListPlusLogger(this);
         this.info = CoreDescription.load(this);
@@ -102,7 +106,7 @@ public class ServerListPlusCore {
         registerConf(CoreConf.class, ConfExamples.forCore(), "Core");
 
         // Initialize the profile manager
-        this.profileManager = new ProfileManager(this);
+        this.profileManager = manager != null ? manager : new JSONProfileManager(this);
 
         plugin.initialize(this);
 

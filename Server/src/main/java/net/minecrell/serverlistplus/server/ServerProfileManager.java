@@ -22,11 +22,23 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.minecrell.serverlistplus.core;
+package net.minecrell.serverlistplus.server;
 
-public interface ProfileManager {
-    void reload() throws ServerListPlusException;
-    void save() throws ServerListPlusException;
-    boolean isEnabled();
-    void setEnabled(boolean state) throws ServerListPlusException;
+import net.minecrell.serverlistplus.core.ProfileManager;
+import net.minecrell.serverlistplus.core.ServerListPlusException;
+
+public final class ServerProfileManager implements ProfileManager {
+    @Override
+    public void reload() throws ServerListPlusException {}
+
+    @Override
+    public void save() throws ServerListPlusException {}
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public void setEnabled(boolean state) throws ServerListPlusException {}
 }
